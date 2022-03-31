@@ -4,8 +4,10 @@ use once_cell::sync::Lazy;
 use serenity::framework::StandardFramework;
 use serenity::prelude::Client;
 
+use crate::command::GENERAL_GROUP;
 use crate::config::Config;
 
+mod command;
 mod config;
 mod ready_handler;
 
@@ -27,7 +29,9 @@ async fn main() {
         }
     }
 
-    let framework = StandardFramework::new().configure(|command| command.prefix(&*CONFIG.prefix));
+    let framework = StandardFramework::new()
+        .configure(|command| command.prefix(&*CONFIG.prefix))
+        .group(&GENERAL_GROUP);
 
     let mut client = Client::builder(&*CONFIG.token)
         .event_handler(ready_handler::Handler)
