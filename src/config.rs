@@ -11,6 +11,7 @@ pub struct Config {
     pub token: String,
     pub prefix: String,
     pub monitoring_channel: u64,
+    pub target_url: String,
 }
 
 pub fn copy_config_if_not_exists() -> io::Result<()> {

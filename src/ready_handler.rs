@@ -17,6 +17,7 @@ impl EventHandler for Handler {
                 let start_message =
                     format!("Monitoring started at <#{}>", CONFIG.monitoring_channel);
                 let say_result = channel.say(context.http, &start_message).await;
+
                 match say_result {
                     Ok(_) => (),
                     Err(err) => {
