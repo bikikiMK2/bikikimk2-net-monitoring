@@ -3,7 +3,8 @@ use serenity::framework::standard::CommandResult;
 use serenity::model::channel::Message;
 use serenity::prelude::Context;
 
-use crate::{status_checker, CONFIG};
+use crate::status_checker;
+use crate::CONFIG;
 
 #[group]
 #[commands(ping, check)]

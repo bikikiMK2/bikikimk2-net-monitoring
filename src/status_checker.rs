@@ -3,6 +3,7 @@ use std::sync::Arc;
 use serenity::http::Http;
 use serenity::model::id::ChannelId;
 
+use crate::util;
 use crate::CONFIG;
 
 pub async fn send_status(http: &Arc<Http>, channel: &ChannelId) -> () {
@@ -27,4 +28,17 @@ pub async fn send_status(http: &Arc<Http>, channel: &ChannelId) -> () {
             channel.say(http, message).await.ok()
         }
     };
+}
+
+pub async fn send_time(http: &Arc<Http>, channel: &ChannelId) -> () {
+    let timestamp = util::current_timestamp();
+    let time = util::parse_timestamp(timestamp);
+
+    let url = &*CONFIG
+        .target_url
+        .replace("http://", "")
+        .replace("https://", "");
+
+    let message = format!("'{}' status at {}:", url, time);
+    channel.say(http, message).await.ok();
 }

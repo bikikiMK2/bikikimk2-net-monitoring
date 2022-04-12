@@ -11,6 +11,7 @@ mod command;
 mod config;
 mod ready_handler;
 mod status_checker;
+mod util;
 
 pub const CONFIG: Lazy<Config> = Lazy::new(|| match config::load_config() {
     Ok(conf) => conf,
