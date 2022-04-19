@@ -11,11 +11,6 @@ pub async fn send_status(http: &Arc<Http>, channel: &ChannelId) -> () {
 
     match client.get(&*CONFIG.target_url).send().await {
         Ok(response) => {
-            channel
-                .say(http, ":white_check_mark: Connected.")
-                .await
-                .ok();
-
             let message = if response.status().is_success() {
                 format!(":white_check_mark: {}.", response.status().to_string())
             } else {
